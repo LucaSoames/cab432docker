@@ -5,16 +5,18 @@ FROM node:18
 WORKDIR /app
 
 # Install backend dependencies
-COPY backend/package*.json ./backend/
+COPY app/backend/package.json ./backend/
+COPY app/backend/package-lock.json ./backend/
 RUN cd backend && npm install
 
 # Install frontend dependencies
-COPY frontend/package*.json ./frontend/
+COPY app/frontend/package.json ./frontend/
+COPY app/frontend/package-lock.json ./backend/
 RUN cd frontend && npm install
 
 # Copy both backend and frontend code
-COPY backend/ ./backend/
-COPY frontend/ ./frontend/
+COPY app/backend/ ./backend/
+COPY app/frontend/ ./frontend/
 
 # Expose ports for the backend and frontend
 EXPOSE 3000 3001
